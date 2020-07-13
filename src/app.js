@@ -65,6 +65,8 @@ export default class App extends React.Component {
           sqlite.insert('CONFIGS',{'ID': 15, 'CAMPO': 'lista', 'VALOR':'false'});
           sqlite.insert('CONFIGS',{'ID': 16, 'CAMPO': 'MHI', 'VALOR':'false'});
           sqlite.insert('CONFIGS',{'ID': 17, 'CAMPO': 'indicadores', 'VALOR':'false'});
+          sqlite.insert('CONFIGS',{'ID': 18, 'CAMPO': 'oposicaoVela', 'VALOR':'false'});
+          sqlite.insert('CONFIGS',{'ID': 19, 'CAMPO': 'tendencia', 'VALOR':'false'});
           sqlite.close()
         }
         else{
@@ -126,7 +128,7 @@ export default class App extends React.Component {
           mode="inline"
           theme="dark"
           inlineCollapsed={this.state.collapsed}
-          style={{height:'100%', marginTop:'-4px'}}
+          style={{height:'550px', marginTop:'-4px'}}
           defaultSelectedKeys={['2']}
         >
           {/* <Menu.Item key="1" onClick={() => this.routePage('welcome')} icon={<PieChartOutlined />}>
@@ -157,7 +159,7 @@ export default class App extends React.Component {
         <Col flex="auto">
         <Content
            className="site-layout-background"
-          style={{
+            style={{
             paddingRight: 5,
             paddingLeft: 15,
             paddingTop: 15,

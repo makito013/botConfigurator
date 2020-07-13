@@ -22,7 +22,7 @@ export default class Config extends React.Component{
     this.menus = {'lista':[]}
     this.valores = Object.keys(props.valoresConfig).length > 0 ? props.valoresConfig : {'tipoConta':'Demo', 'negociacao': '10', 'tipoValor': '%', 'qtdMartingale':'2', 'delay': '2', 'delayMartingale' : '1',
                     'stopGain':'30', 'tipoStopGain':'%', 'stopLoss':'40', 'tipoStopLoss':'%', 'minimoPayout': '75', 'SMA': false, 'EMA': false,
-                    'periodoEMA':'100','periodoSMA':'100', 'lista': false, 'MHI': false, "indicadores": false}
+                    'periodoEMA':'100','periodoSMA':'100', 'lista': false, 'MHI': false, "indicadores": false, 'oposicaoVela': false}
     this.valoresIniciais = this.valores;
     this.ps = this.props.powershell;
     this.conectar = this.conectar.bind(this)
@@ -318,48 +318,31 @@ export default class Config extends React.Component{
               >
                 <Panel showArrow = {false} onClick={null} header="indicadores" key="1" extra={this.genExtra('indicadores')}>
                 <Form
-                    labelCol={{ span: 10 }}
-                    wrapperCol={{ span: 14 }}
+                    labelCol={{ span: 15 }}
+                    wrapperCol={{ span: 9 }}
                     layout="horizontal"
                     size={componentSize}  
                   >
-                    <Form.Item name='SMA' label="SMA">
+                    <Form.Item name='tendencia' label="Analisador de Tendencia">
                       <span>
                         Não
-                        <Switch size="small" style={{margin: '0px 10px 0px 10px'}} onChange={(e) => this.onSwitchChange(e, 'SMA')} defaultChecked={this.convBol(this.valores['SMA'])} />
+                        <Switch size="small" style={{margin: '0px 10px 0px 10px'}} onChange={(e) => this.onSwitchChange(e, 'tendencia')} defaultChecked={this.convBol(this.valores['tendencia'])} />
                         Sim
                       </span>
-                    </Form.Item>
-                    {this.convBol(this.valores['SMA']) === true ? (
-                      <Form.Item name='periodoSMA' label="Periodo SMA">
-                      <span>
-                      <InputNumber
-                        onChange={(e) => this.onChange(e, 'periodoSMA')}
-                        defaultValue={parseInt(this.valores['periodoSMA'])}
-                        type="text"
-                        max = {200}
-                        min = {2}
-                        style={{
-                          width: '100%'
-                        }}
-                      />
-                      </span>
+                    </Form.Item>{this.convBol(this.valores['tendencia']) === true ? (<>
+                      <Form.Item name='SMA' label="SMA">
+                        <span>
+                          Não
+                          <Switch size="small" style={{margin: '0px 10px 0px 10px'}} onChange={(e) => this.onSwitchChange(e, 'SMA')} defaultChecked={this.convBol(this.valores['SMA'])} />
+                          Sim
+                        </span>
                       </Form.Item>
-                    ) : null}
-                    
-                    <Form.Item name='EMA' label="EMA">
-                      <span>
-                        Não
-                        <Switch size="small" style={{margin: '0px 10px 0px 10px'}} onChange={(e) => this.onSwitchChange(e, 'EMA')} defaultChecked={this.convBol(this.valores['EMA'])} />
-                        Sim
-                      </span>
-                    </Form.Item>
-                    {this.convBol(this.valores['EMA']) === true ? (
-                    <Form.Item name='periodoEMA' label="Periodo EMA">
+                      {this.convBol(this.valores['SMA']) === true ? (
+                        <Form.Item name='periodoSMA' label="Periodo SMA">
                         <span>
                         <InputNumber
-                          defaultValue={parseInt(this.valores['periodoEMA'])}
-                          onChange={(e) => this.onChange(e, 'periodoEMA')}
+                          onChange={(e) => this.onChange(e, 'periodoSMA')}
+                          defaultValue={parseInt(this.valores['periodoSMA'])}
                           type="text"
                           max = {200}
                           min = {2}
@@ -368,8 +351,41 @@ export default class Config extends React.Component{
                           }}
                         />
                         </span>
-                    </Form.Item>
+                        </Form.Item>
+                      ) : null}
+                      
+                      <Form.Item name='EMA' label="EMA">
+                        <span>
+                          Não
+                          <Switch size="small" style={{margin: '0px 10px 0px 10px'}} onChange={(e) => this.onSwitchChange(e, 'EMA')} defaultChecked={this.convBol(this.valores['EMA'])} />
+                          Sim
+                        </span>
+                      </Form.Item>
+                      {this.convBol(this.valores['EMA']) === true ? (
+                      <Form.Item name='periodoEMA' label="Periodo EMA">
+                          <span>
+                          <InputNumber
+                            defaultValue={parseInt(this.valores['periodoEMA'])}
+                            onChange={(e) => this.onChange(e, 'periodoEMA')}
+                            type="text"
+                            max = {200}
+                            min = {2}
+                            style={{
+                              width: '100%'
+                            }}
+                          />
+                          </span>
+                      </Form.Item>
+                      ) : null}
+                      </>
                     ) : null}
+                    <Form.Item name='oposicaoVela' label="Oposição de Vela">
+                      <span>
+                        Não
+                        <Switch size="small" style={{margin: '0px 10px 0px 10px'}} onChange={(e) => this.onSwitchChange(e, 'oposicaoVela')} defaultChecked={this.convBol(this.valores['oposicaoVela'])} />
+                        Sim
+                      </span>
+                    </Form.Item>
                   </Form>
                 </Panel>
               </Collapse>

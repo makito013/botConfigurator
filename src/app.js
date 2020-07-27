@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 var sqlite = require('sqlite-sync');
 import Welcome from './components/welcome';
 import Configuration from './components/config';
+import Lista from './components/lista';
 import { Layout, Menu, Row, Col, Button, Space  } from 'antd';
 import {
     AppstoreOutlined,
@@ -92,6 +93,8 @@ export default class App extends React.Component {
           return <Route render={props => <Welcome conected={false} powershell={ps}></Welcome>}/>
         case 'configuration':
           return <Route render={props => <Configuration conected={false} valoresConfig={this.valoresConfig} powershell={ps}></Configuration>}/>
+        case 'lista':
+          return <Route render={props => <Lista conected={false}/>}/>
       }
         
 
@@ -137,9 +140,10 @@ export default class App extends React.Component {
           <Menu.Item key="2" onClick={() => this.routePage('configuration')} icon={<DesktopOutlined />}>
             Configuração
           </Menu.Item>
-          {/* <Menu.Item key="3" icon={<ContainerOutlined />}>
+          <Menu.Item key="3" onClick={() => this.routePage('lista')} icon={<ContainerOutlined />}>
             Lista
           </Menu.Item>
+          {/*
           <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
             <Menu.Item key="5">Option 5</Menu.Item>
             <Menu.Item key="6">Option 6</Menu.Item>

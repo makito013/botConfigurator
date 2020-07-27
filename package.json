@@ -1,14 +1,13 @@
 {
-  "name": "reactron",
-  "displayName": "Projeto base para uma aplicacao React/Electron/Material",
-  "description": "Projeto base para uma aplicacao React/Electron/Material",
+  "name": "configurador",
+  "displayName": "Configurador Win Trader",
+  "description": "Configuração do Robo",
   "version": "1.0.0",
   "license": "MIT",
-  "repository": "https://github.com/ricardomansano/reactron",
-  "publisher": "Mansano",
+  "publisher": "makito",
   "author": {
-    "name": "Ricardo Mansano",
-    "email": "ricardomansano@live.com"
+    "name": "Bruno Andrade",
+    "email": "bandradest@gmail.com"
   },
   "main": "app/main.js",
   "scripts": {
@@ -59,6 +58,7 @@
       ]
     },
     "win": {
+	 "icon": "./build/icon.ico",
       "target": [
         {
           "target": "dir",
@@ -71,6 +71,12 @@
     },
     "mac": {
       "category": "your.app.category.type"
+    },
+    "files": [
+      "build/*"
+    ],
+    "directories": {
+    	"buildResources": "build"
     }
   }
 }

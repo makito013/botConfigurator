@@ -1,7 +1,8 @@
 import electron from 'electron';
 import path from 'path';
 import url from 'url';
-
+const path = require('path');
+const iconPath = path.join(__dirname, "build", "icon.ico");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 let mainWindow;
@@ -27,6 +28,7 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     minWidth : 800,
     minHeight: 600,
+    icon: iconPath,
     
     // Caracteristicas visuais da janela
     // autoHideMenuBar: true,
